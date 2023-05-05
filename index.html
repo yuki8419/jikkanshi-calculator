@@ -59,32 +59,30 @@ p {
     <p id="result"></p>
 
 <script>
-function calculateKanji(date) {
-    const baseYear = 1924;
-    const baseKanIndex = 4; // 甲=0, 乙=1, 丙=2, 丁=3, 戊=4, 己=5, 庚=6, 辛=7, 壬=8, 癸=9
-    const baseShiIndex = 2; // 子=0, 丑=1, 寅=2, 卯=3, 辰=4, 巳=5, 午=6, 未=7, 申=8, 酉=9, 戌=10, 亥=11
+    function calculateKanji(date) {
+        const baseDate = new Date(1924, 0, 1); // 基準日（1924年1月1日）
+        const dayDifference = Math.floor((date - baseDate) / (1000 * 60 * 60 * 24));
 
-    const kan = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
-    const shi = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
+        const kan = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
+        const shi = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
 
-    const yearDifference = date.getFullYear() - baseYear;
-    const kanIndex = (baseKanIndex + yearDifference) % 10;
-    const shiIndex = (baseShiIndex + yearDifference) % 12;
+        const kanIndex = (dayDifference + 5) % 10;
+        const shiIndex = (dayDifference + 3) % 12;
 
-    return kan[kanIndex] + shi[shiIndex];
-}
-
-document.getElementById('calculate').addEventListener('click', function() {
-    const birthdate = document.getElementById('birthdate').value;
-    const date = new Date(birthdate);
-
-    if (!isNaN(date.getTime())) {
-        const result = calculateKanji(date);
-        document.getElementById('result').innerText = '日干支: ' + result;
-    } else {
-        document.getElementById('result').innerText = '正しい生年月日を入力してください。';
+        return kan[kanIndex] + shi[shiIndex];
     }
-});
+
+    document.getElementById('calculate').addEventListener('click', function() {
+        const birthdate = document.getElementById('birthdate').value;
+        const date = new Date(birthdate);
+
+        if (!isNaN(date.getTime())) {
+            const result = calculateKanji(date);
+            document.getElementById('result').innerText = '日干支: ' + result;
+        } else {
+            document.getElementById('result').innerText = '正しい生年月日を入力してください。';
+        }
+    });
 </script>
 </body>
 </html>
