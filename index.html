@@ -93,17 +93,19 @@
         return kan[kanIndex] + shi[shiIndex];
     }
 
-    function generateOptions(element, start, end) {
+    function generateOptions(element, start, end, defaultValue) {
         for (let i = start; i <= end; i++) {
             const option = document.createElement('option');
             option.value = i;
             option.text = i;
+            if (i === defaultValue) {
+                option.selected = true;
+            }
             element.add(option);
         }
     }
 
-    const currentYear = new Date().getFullYear();
-    generateOptions(document.getElementById('year'), 1900, currentYear);
+    generateOptions(document.getElementById('year'), 1900, 2030, 1980);
     generateOptions(document.getElementById('month'), 1, 12);
     generateOptions(document.getElementById('day'), 1, 31);
 
@@ -117,7 +119,7 @@
         if (!isNaN(date.getTime())) {
             const result = calculateKanji(date);
             document.getElementById('result').innerText = 'あなたの日干支は' + result + 'です。';
-} else {
+        } else {
             document.getElementById('result').innerText = '正しい生年月日を入力してください。';
         }
     }
