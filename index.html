@@ -50,7 +50,6 @@ p {
 }
 
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/qimen@1.0.1/lib/qimen.min.js"></script>
 </head>
 <body>
     <h1>日干支計算</h1>
@@ -59,26 +58,33 @@ p {
     <button id="calculate">日干支を計算</button>
     <p id="result"></p>
 
-<script src="https://unpkg.com/qimen"></script>
 <script>
-    function calculateKanji(date) {
-    // 日本時間に対応させるため、9時間を追加する
-    const japanDate = new Date(date.getTime() + 9 * 60 * 60 * 1000);
-    const qimen = new Qimen(japanDate.getFullYear(), japanDate.getMonth() + 1, japanDate.getDate());
-    return qimen.getStemBranchOfDay();
+function calculateKanji(date) {
+    const baseYear = 1924;
+    const baseKanIndex = 4; // 甲=0, 乙=1, 丙=2, 丁=3, 戊=4, 己=5, 庚=6, 辛=7, 壬=8, 癸=9
+    const baseShiIndex = 2; // 子=0, 丑=1, 寅=2, 卯=3, 辰=4, 巳=5, 午=6, 未=7, 申=8, 酉=9, 戌=10, 亥=11
+
+    const kan = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
+    const shi = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
+
+    const yearDifference = date.getFullYear() - baseYear;
+    const kanIndex = (baseKanIndex + yearDifference) % 10;
+    const shiIndex = (baseShiIndex + yearDifference) % 12;
+
+    return kan[kanIndex] + shi[shiIndex];
 }
 
-    document.getElementById('calculate').addEventListener('click', function() {
-        const birthdate = document.getElementById('birthdate').value;
-        const date = new Date(birthdate);
+document.getElementById('calculate').addEventListener('click', function() {
+    const birthdate = document.getElementById('birthdate').value;
+    const date = new Date(birthdate);
 
-        if (!isNaN(date.getTime())) {
-            const result = calculateKanji(date);
-            document.getElementById('result').innerText = '日干支: ' + result;
-        } else {
-            document.getElementById('result').innerText = '正しい生年月日を入力してください。';
-        }
-    });
+    if (!isNaN(date.getTime())) {
+        const result = calculateKanji(date);
+        document.getElementById('result').innerText = '日干支: ' + result;
+    } else {
+        document.getElementById('result').innerText = '正しい生年月日を入力してください。';
+    }
+});
 </script>
 </body>
 </html>
