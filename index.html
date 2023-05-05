@@ -61,9 +61,11 @@ p {
 <script src="https://unpkg.com/qimen"></script>
 <script>
     function calculateKanji(date) {
-        const qimen = new Qimen(date.getFullYear(), date.getMonth() + 1, date.getDate());
-        return qimen.getStemBranchOfDay();
-    }
+    // 日本時間に対応させるため、9時間を追加する
+    const japanDate = new Date(date.getTime() + 9 * 60 * 60 * 1000);
+    const qimen = new Qimen(japanDate.getFullYear(), japanDate.getMonth() + 1, japanDate.getDate());
+    return qimen.getStemBranchOfDay();
+}
 
     document.getElementById('calculate').addEventListener('click', function() {
         const birthdate = document.getElementById('birthdate').value;
