@@ -15,11 +15,29 @@
             }
         }
 
+        @keyframes shooting {
+            0% {
+                transform: translateX(0) translateY(0);
+            }
+            100% {
+                transform: translateX(-100px) translateY(100px);
+            }
+        }
+
         .twinkling {
             animation: twinkling 1s linear infinite;
             background-color: rgba(255, 255, 255, 0.5);
             width: 3px;
             height: 3px;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .shooting-star {
+            animation: shooting 1s linear infinite;
+            background-color: rgba(255, 255, 255, 0.5);
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
             position: absolute;
         }
@@ -33,8 +51,7 @@
             min-height: 100vh;
             margin: 0;
             padding: 0;
-            background-color: #f0f0f0;
-            background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+            background-color: #0d1117;
             position: relative;
             overflow: hidden;
         }
@@ -49,7 +66,7 @@
 
         label {
             font-size: 1.5rem;
-            color: #212529;
+            color: #ffffff;
         }
 
         select, button {
@@ -97,6 +114,7 @@
         <select id="month"></select>
         <select id="day"></select>
     </div>
+   
     <button id="calculate">日干支を算出</button>
     <p id="result"></p>
 
@@ -163,19 +181,33 @@
         generateOptions(dayElement, 1, daysInMonth);
     });
 
-        function createTwinkling() {
-            const twinkling = document.createElement('div');
-            twinkling.classList.add('twinkling');
-            twinkling.style.left = Math.random() * 100 + 'vw';
-            twinkling.style.top = Math.random() * 100 + 'vh';
-            twinkling.style.animationDuration = (Math.random() * 1 + 0.5) + 's';
-            twinkling.style.animationDelay = (Math.random() * 2) + 's';
-            document.getElementById('twinkling-container').appendChild(twinkling);
-        }
+    function createTwinkling() {
+        const twinkling = document.createElement('div');
+        twinkling.classList.add('twinkling');
+        twinkling.style.left = Math.random() * 100 + 'vw';
+        twinkling.style.top = Math.random() * 100 + 'vh';
+        twinkling.style.animationDuration = (Math.random() * 1 + 0.5) + 's';
+        twinkling.style.animationDelay = (Math.random() * 2) + 's';
+        document.getElementById('twinkling-container').appendChild(twinkling);
+    }
 
-        for (let i = 0; i < 100; i++) {
-            createTwinkling();
-        }
+    function createShootingStar() {
+        const shootingStar = document.createElement('div');
+        shootingStar.classList.add('shooting-star');
+        shootingStar.style.left = Math.random() * 100 + 'vw';
+        shootingStar.style.top = Math.random() * 100 + 'vh';
+        shootingStar.style.animationDuration = (Math.random() * 1 + 0.5) + 's';
+        shootingStar.style.animationDelay = (Math.random() * 10) + 's';
+        document.getElementById('twinkling-container').appendChild(shootingStar);
+    }
+
+    for (let i = 0; i < 100; i++) {
+        createTwinkling();
+    }
+
+    for (let i = 0; i < 10; i++) {
+        createShootingStar();
+    }
 </script>
 </body>
 </html>
