@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -60,20 +58,14 @@ p {
     <button id="calculate">日干支を計算</button>
     <p id="result"></p>
 
+<script src="https://unpkg.com/qimen"></script>
 <script>
     function calculateKanji(date) {
-        const lunarCal = new Date(1900, 0, 31); // 陰暦の基準日
-        const dayDifference = Math.floor((date - lunarCal) / (1000 * 60 * 60 * 24));
-
-        const kan = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
-        const shi = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
-
-        const kanIndex = (dayDifference + 9) % 10;
-        const shiIndex = (dayDifference + 1) % 12;
-
-        return kan[kanIndex] + shi[shiIndex];
+        const qimen = new Qimen(date.getFullYear(), date.getMonth() + 1, date.getDate());
+        return qimen.getStemBranchOfDay();
     }
- document.getElementById('calculate').addEventListener('click', function() {
+
+    document.getElementById('calculate').addEventListener('click', function() {
         const birthdate = document.getElementById('birthdate').value;
         const date = new Date(birthdate);
 
