@@ -60,7 +60,7 @@ p {
 
 <script>
     function calculateKanji(date) {
-        const baseDate = new Date(1924, 1, 1); // 基準日（1924年1月1日）
+        const baseDate = new Date(1924, 0, 1); // 基準日（1924年1月1日）
         const dayDifference = Math.floor((date - baseDate) / (1000 * 60 * 60 * 24));
 
         const kan = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
@@ -72,7 +72,8 @@ p {
         return kan[kanIndex] + shi[shiIndex];
     }
 
-    function handleClick() {
+    function handleClick(event) {
+        event.preventDefault();
         const birthdate = document.getElementById('birthdate').value;
         const date = new Date(birthdate);
 
@@ -85,7 +86,7 @@ p {
     }
 
     document.getElementById('calculate').addEventListener('click', handleClick);
-    document.getElementById('calculate').addEventListener('touchstart', handleClick);
+    document.getElementById('calculate').addEventListener('touchend', handleClick);
 </script>
 </body>
 </html>
