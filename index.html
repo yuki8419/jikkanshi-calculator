@@ -50,6 +50,7 @@ p {
 }
 
     </style>
+    <script src="https://unpkg.com/lunar-calendar@1.1.0"></script>
 </head>
 <body>
     <h1>日干支計算</h1>
@@ -60,18 +61,18 @@ p {
 
 <script>
     function calculateKanji(date) {
-        const lunarCal = new Date(1900, 0, 31); // 陰暦の基準日
-        const dayDifference = Math.floor((date - lunarCal) / (1000 * 60 * 60 * 24));
+        const lunarDate = LunarCalendar.solarToLunar(date);
 
         const kan = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
         const shi = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
 
-        const kanIndex = (dayDifference + 9) % 10;
-        const shiIndex = (dayDifference + 1) % 12;
+        const kanIndex = (lunarDate.Gan - 1) % 10;
+        const shiIndex = (lunarDate.Zhi - 1) % 12;
 
         return kan[kanIndex] + shi[shiIndex];
     }
- document.getElementById('calculate').addEventListener('click', function() {
+
+    document.getElementById('calculate').addEventListener('click', function() {
         const birthdate = document.getElementById('birthdate').value;
         const date = new Date(birthdate);
 
