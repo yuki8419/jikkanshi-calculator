@@ -26,7 +26,7 @@ label {
     font-size: 1.2rem;
 }
 
-input, button {
+select, button {
     font-size: 1.1rem;
 }
 
@@ -53,14 +53,18 @@ p {
 </head>
 <body>
     <h1>日干支計算</h1>
-    <label for="birthdate">生年月日:</label>
-    <input type="date" id="birthdate">
+    <label for="year">年:</label>
+    <select id="year"></select>
+    <label for="month">月:</label>
+    <select id="month"></select>
+    <label for="day">日:</label>
+    <select id="day"></select>
     <button id="calculate">日干支を計算</button>
     <p id="result"></p>
 
 <script>
     function calculateKanji(date) {
-        const baseDate = new Date(1924, 1, 1); // 基準日（1924年1月1日）
+        const baseDate = new Date(1924, 0, 1); // 基準日（1924年1月1日）
         const dayDifference = Math.floor((date - baseDate) / (1000 * 60 * 60 * 24));
 
         const kan = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
@@ -72,10 +76,26 @@ p {
         return kan[kanIndex] + shi[shiIndex];
     }
 
+    function generateOptions(element, start, end) {
+        for (let i = start; i <= end; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.text = i;
+            element.add(option);
+        }
+    }
+
+    const currentYear = new Date().getFullYear();
+    generateOptions(document.getElementById('year'), 1900, currentYear);
+    generateOptions(document.getElementById('month'), 1, 12);
+    generateOptions(document.getElementById('day'), 1, 31);
+
     function handleClick(event) {
         event.preventDefault();
-        const birthdate = document.getElementById('birthdate').value;
-        const date = new Date(birthdate);
+        const year = document.getElementById('year').value;
+        const month = document.getElementById('month').value - 1; // 月は0から始まるため
+        const day = document.getElementById('day').value;
+        const date = new Date(year, month, day);
 
         if (!isNaN(date.getTime())) {
             const result = calculateKanji(date);
@@ -87,6 +107,21 @@ p {
 
     document.getElementById('calculate').addEventListener('click', handleClick);
     document.getElementById('calculate').addEventListener('touchend', handleClick);
+
+    document.getElementById('month').addEventListener('change', function() {
+        const month = parseInt(this.value);
+        const year = parseInt(document.getElementById('year').value);
+        const dayElement = document.getElementById('day');
+        dayElement.options.length = 0;
+
+        let daysInMonth = 31;
+        if (month === 4 || month === 6 || month === 9 || month === 11) {
+            daysInMonth = 30;
+        } else if (month === 2) {
+            daysInMonth = (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0)) ? 29 : 28;
+        }
+        generateOptions(dayElement, 1, daysInMonth);
+    });
 </script>
 </body>
 </html>
