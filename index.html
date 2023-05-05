@@ -61,7 +61,8 @@ p {
 
 <script>
     function calculateKanji(date) {
-        const lunarDate = LunarCalendar.solarToLunar(date);
+        const lunarCal = new Date(1900, 0, 31); // 陰暦の基準日
+        const dayDifference = Math.floor((date - lunarCal) / (1000 * 60 * 60 * 24));
 
         const kan = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
         const shi = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
