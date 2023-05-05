@@ -60,7 +60,7 @@ p {
 
 <script>
     function calculateKanji(date) {
-        const baseDate = new Date(1924, , 1); // 基準日（1924年1月1日）
+        const baseDate = new Date(1924, 1, 1); // 基準日（1924年1月1日）
         const dayDifference = Math.floor((date - baseDate) / (1000 * 60 * 60 * 24));
 
         const kan = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
@@ -72,7 +72,7 @@ p {
         return kan[kanIndex] + shi[shiIndex];
     }
 
-    document.getElementById('calculate').addEventListener('click', function() {
+    function handleClick() {
         const birthdate = document.getElementById('birthdate').value;
         const date = new Date(birthdate);
 
@@ -82,7 +82,10 @@ p {
         } else {
             document.getElementById('result').innerText = '正しい生年月日を入力してください。';
         }
-    });
+    }
+
+    document.getElementById('calculate').addEventListener('click', handleClick);
+    document.getElementById('calculate').addEventListener('touchstart', handleClick);
 </script>
 </body>
 </html>
