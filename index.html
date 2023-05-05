@@ -66,8 +66,8 @@ p {
         const kan = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
         const shi = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
 
-        const kanIndex = (lunarDate.Gan - 1) % 10;
-        const shiIndex = (lunarDate.Zhi - 1) % 12;
+        const kanIndex = (dayDifference + 9) % 10;
+        const shiIndex = (dayDifference + 1) % 12;
 
         return kan[kanIndex] + shi[shiIndex];
     }
