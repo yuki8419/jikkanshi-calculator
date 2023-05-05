@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日干支計算</title>
+    <style>
+       body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+label {
+    font-size: 1.2rem;
+}
+
+input, button {
+    font-size: 1.1rem;
+}
+
+button {
+    margin-left: 1rem;
+    padding: 0.3rem 1rem;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #0056B3;
+}
+
+p {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+}
+
+    </style>
+</head>
+<body>
+    <h1>日干支計算</h1>
+    <label for="birthdate">生年月日:</label>
+    <input type="date" id="birthdate">
+    <button id="calculate">日干支を計算</button>
+    <p id="result"></p>
+
+<script>
+    function calculateKanji(date) {
+        const lunarCal = new Date(1900, 0, 31); // 陰暦の基準日
+        const dayDifference = Math.floor((date - lunarCal) / (1000 * 60 * 60 * 24));
+
+        const kan = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
+        const shi = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
+
+        const kanIndex = (dayDifference + 9) % 10;
+        const shiIndex = (dayDifference + 1) % 12;
+
+        return kan[kanIndex] + shi[shiIndex];
+    }
+ document.getElementById('calculate').addEventListener('click', function() {
+        const birthdate = document.getElementById('birthdate').value;
+        const date = new Date(birthdate);
+
+        if (!isNaN(date.getTime())) {
+            const result = calculateKanji(date);
+            document.getElementById('result').innerText = '日干支: ' + result;
+        } else {
+            document.getElementById('result').innerText = '正しい生年月日を入力してください。';
+        }
+    });
+</script>
+</body>
+</html>
