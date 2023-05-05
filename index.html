@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>日干支計算</title>
+    <title>あなたの日干支を知ろう</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Noto Sans JP', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -22,6 +23,7 @@
             font-size: 3rem;
             margin-bottom: 1rem;
             color: #ffffff;
+            font-weight: 300;
         }
 
         label {
@@ -66,7 +68,7 @@
     </style>
 </head>
 <body>
-    <h1>日干支計算</h1>
+    <h1>あなたの日干支を知ろう</h1>
     <div class="form-group">
         <label for="year">生年月日:</label>
         <select id="year"></select>
@@ -113,8 +115,8 @@
 
         if (!isNaN(date.getTime())) {
             const result = calculateKanji(date);
-            document.getElementById('result').innerText = '日干支: ' + result;
-        } else {
+            document.getElementById('result').innerText = 'あなたの日干支は' + result + 'です。';
+} else {
             document.getElementById('result').innerText = '正しい生年月日を入力してください。';
         }
     }
