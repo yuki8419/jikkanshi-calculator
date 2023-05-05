@@ -5,60 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>日干支計算</title>
     <style>
-       body {
-    font-family: 'Arial', sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
-    background-color: #f0f0f0;
-}
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
 
-h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-}
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
 
-label {
-    font-size: 1.2rem;
-}
+        label {
+            font-size: 1.5rem;
+        }
 
-select, button {
-    font-size: 1.1rem;
-}
+        select, button {
+            font-size: 1.5rem;
+        }
 
-button {
-    margin-left: 1rem;
-    padding: 0.3rem 1rem;
-    cursor: pointer;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-}
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-button:hover {
-    background-color: #0056B3;
-}
+        button {
+            margin-top: 1rem;
+            padding: 0.5rem 1.5rem;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
 
-p {
-    font-size: 1.2rem;
-    margin-top: 1rem;
-}
+        button:hover {
+            background-color: #0056B3;
+        }
+
+        p {
+            font-size: 1.5rem;
+            margin-top: 1rem;
+        }
 
     </style>
 </head>
 <body>
     <h1>日干支計算</h1>
-    <label for="year">年:</label>
-    <select id="year"></select>
-    <label for="month">月:</label>
-    <select id="month"></select>
-    <label for="day">日:</label>
-    <select id="day"></select>
+    <div class="form-group">
+        <label for="year">生年月日:</label>
+        <select id="year"></select>
+        <select id="month"></select>
+        <select id="day"></select>
+    </div>
     <button id="calculate">日干支を計算</button>
     <p id="result"></p>
 
