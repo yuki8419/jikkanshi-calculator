@@ -47,7 +47,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
+            padding-top: 5vh;
             min-height: 100vh;
             margin: 0;
             padding: 0;
@@ -98,9 +99,16 @@
         }
 
         p {
-            font-size: 1.5rem;
+            font-size: 1.5vw;
             margin-top: 1rem;
             color: #ffffff;
+            text-align: center;
+        }
+
+        .emphasized {
+            font-size: 2.5vw; /* 修正: 強調部分のフォントサイズを大きくする */
+            font-weight: 700; /* 修正: フォントを太くする */
+            color: #FFD700; /* 修正: 色を変更 */
         }
 
     </style>
