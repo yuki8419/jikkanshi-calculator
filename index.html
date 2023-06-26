@@ -135,6 +135,8 @@
    
     <button id="calculate">日干支を算出</button>
     <p id="result"></p>
+    <button id="copy-button" style="display:none;">結果をコピー</button> <!-- ボタンの追加 -->
+    <p id="result"></p>
 
 <script>
     function calculateKanji(date) {
@@ -172,6 +174,8 @@
         const month = document.getElementById('month').value - 1; // 月は0から始まるため
         const day = document.getElementById('day').value;
         const date = new Date(year, month, day);
+
+        const copyButton = document.getElementById('copy-button');
 
         if (!isNaN(date.getTime())) {
             const result = calculateKanji(date);
