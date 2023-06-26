@@ -137,7 +137,6 @@
     <p id="result-prefix" style="display: none;">あなたの日干支は</p>
     <p id="result" class="emphasized"></p>
     <p id="result-suffix" style="display: none;">です。回答部分をコピペして公式ラインに張り付けてみてね！</p>
-    <button id="copy-button" style="display: none;">結果をコピー</button>
     
 <script>
     function calculateKanji(date) {
@@ -199,8 +198,11 @@
     document.getElementById('calculate').addEventListener('touchend', handleClick);
 
     document.getElementById('result').addEventListener('click', async function() {
+        
+        const copyText = document.getElementById('result').textContent.split("は")[1].split("です")[0];
+        
         try {
-            await navigator.clipboard.writeText(document.getElementById('result').textContent);
+            await navigator.clipboard.writeText(copyText);
             alert('コピーされました！');
         } catch(err) {
             alert('ご利用のブラウザではコピーがサポートされていません');
