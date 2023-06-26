@@ -134,9 +134,11 @@
     </div>
    
     <button id="calculate">日干支を算出</button>
-    <p id="result"></p>
-    <button id="copy-button" style="display:none;">結果をコピー</button> <!-- ボタンの追加 -->
-
+    <p id="result-prefix" style="display: none;">あなたの日干支は</p>
+    <p id="result" class="emphasized"></p>
+    <p id="result-suffix" style="display: none;">です。\n回答部分をコピペして公式ラインに張り付けてみてね！</p>
+    <button id="copy-button" style="display: none;">結果をコピー</button>
+    
 <script>
     function calculateKanji(date) {
         const baseDate = new Date(1924, 0, 1); // 基準日（1924年1月1日）
@@ -174,13 +176,22 @@
         const day = document.getElementById('day').value;
         const date = new Date(year, month, day);
 
+        const resultElement = document.getElementById('result');
+        const resultPrefixElement = document.getElementById('result-prefix');
+        const resultSuffixElement = document.getElementById('result-suffix');
         const copyButton = document.getElementById('copy-button');
 
-        if (!isNaN(date.getTime())) {
+       if (!isNaN(date.getTime())) {
             const result = calculateKanji(date);
-            document.getElementById('result').innerText = 'あなたの日干支は' + result + 'です。\n回答部分をコピペして公式ラインに張り付けてみてね！';
+            resultElement.innerText = result;
+            resultPrefixElement.style.display = 'block';
+            resultSuffixElement.style.display = 'block';
+            copyButton.style.display = 'block';
         } else {
-            document.getElementById('result').innerText = '正しい生年月日を入力してください。';
+            resultElement.innerText = '正しい生年月日を入力してください。';
+            resultPrefixElement.style.display = 'none';
+            resultSuffixElement.style.display = 'none';
+            copyButton.style.display = 'none';
         }
     }
 
